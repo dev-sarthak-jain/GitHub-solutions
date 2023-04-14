@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool binarySearch(vector<int> nums,int target, int s,int e)
+    bool binarySearch(vector<int>& nums,int target, int s,int e)
     {
         if (s>e){return 0;}
         int m = (s+e)/2;
@@ -18,8 +18,7 @@ public:
         {
             if(nums[i][0]<=target && nums[i][m-1]>=target)
             {
-                bool ret = binarySearch(nums[i],target,0,m-1);
-                if (ret == 1){return 1;}
+                return binarySearch(nums[i],target,0,m-1);
             }
         }
         return 0;
