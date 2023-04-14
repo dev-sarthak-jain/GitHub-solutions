@@ -1,24 +1,24 @@
 class Solution {
 public:
+    bool binarySearch(vector<int>& nums,int target, int s,int e)
+    {
+        if (s>e){return 0;}
+        int m = (s+e)/2;
+        if (nums[m] == target){return 1;}
+        else
+        {
+            return (binarySearch(nums,target,s,m-1) || binarySearch(nums,target,m+1,e));
+        }
+    }
+
     bool searchMatrix(vector<vector<int>>& nums, int target) {
         int n = nums.size();
         int m = nums[0].size();
-        int p=0,q=n-1,i;
-        while(p<=q)
+        for(int i=0;i<n;i++)
         {
-            i = (p+q)/2;
-            if (nums[i][0]>target){q = i-1;}
-            else if (nums[i][m-1]<target){p = i + 1;}
-            else{
-                int s = 0,e=m-1,mid;
-                while(s<=e)
-                {
-                    mid = (s+e)/2;
-                    if (nums[i][mid] == target){return 1;}
-                    else if(nums[i][mid] > target){e = mid-1;}
-                    else{s = mid+1;}
-                }
-                return 0;
+            if(nums[i][0]<=target && nums[i][m-1]>=target)
+            {
+                return binarySearch(nums[i],target,0,m-1);
             }
         }
         return 0;
