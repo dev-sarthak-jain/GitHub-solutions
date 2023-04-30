@@ -13,7 +13,6 @@ public:
             if (a[i] == 1)
             {
                 ans++;
-                //if(i >=pow(n,.5)){continue;}
                 for(long int j=i*i;j<n;j+=i)
                 {
                     a[j] = 0;
