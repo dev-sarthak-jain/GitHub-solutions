@@ -9,10 +9,7 @@ public:
             n = max(n,salary[i]);
             m = min(m,salary[i]);
         }
-        if(n==m){avg -= n;return avg/(salary.size()-1);}
-        else{
-            avg-=n;avg-=m;
+            avg += -n - m;
             return avg/(salary.size()-2);
-        }
     }
 };
