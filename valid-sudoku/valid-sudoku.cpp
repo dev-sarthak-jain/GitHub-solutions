@@ -1,24 +1,20 @@
 class Solution {
 public:
     bool isValidSudoku(vector<vector<char>>& b) {
-        vector<bool> temp(10,0);
-        vector<vector<bool>> row(9,temp);
-        vector<vector<bool>> col(9,temp);
-        vector<vector<bool>> sect(9,temp);
-        for(int i=0;i<9;i++)
-        {
-            for(int j=0;j<9;j++)
-            {
-                if (b[i][j] == '.') { continue;}
-                int x = b[i][j] - 48;
-                if (row[i][x]){return 0;}
-                else {row[i][x] = 1;}
-                if (col[j][x]){return 0;}
-                else {col[j][x] = 1;}
-                if (sect[((i/3)*3 + j/3)][x]){return 0;}
-                else {sect[((i/3)*3 + j/3)][x] = 1;}
+        vector<bool> temp(10, false);
+        vector<vector<bool>> row(9, temp);
+        vector<vector<bool>> col(9, temp);
+        vector<vector<bool>> sect(9, temp);
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (b[i][j] == '.') continue;
+                int x = b[i][j] - '0';
+                if (row[i][x] || col[j][x] || sect[(i / 3) * 3 + j / 3][x]) return false;
+                row[i][x] ? false : row[i][x] = true;
+                col[j][x] ? false : col[j][x] = true;
+                sect[(i / 3) * 3 + j / 3][x] ? false : sect[(i / 3) * 3 + j / 3][x] = true;
             }
         }
-        return 1;
+        return true;
     }
 };
