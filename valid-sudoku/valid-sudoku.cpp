@@ -11,11 +11,11 @@ public:
             {
                 if (b[i][j] == '.') { continue;}
                 int x = b[i][j] - 48;
-                if (row[i][x]){return 0;}
+                if (row[i][x] == 1){return 0;}
                 else {row[i][x] = 1;}
-                if (col[j][x]){return 0;}
+                if (col[j][x] == 1){return 0;}
                 else {col[j][x] = 1;}
-                if (sect[((i/3)*3 + j/3)][x]){return 0;}
+                if (sect[((i/3)*3 + j/3)][x] == 1){return 0;}
                 else {sect[((i/3)*3 + j/3)][x] = 1;}
             }
         }
