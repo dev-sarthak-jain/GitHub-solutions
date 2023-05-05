@@ -1,3 +1,6 @@
+#define check1 if (s[j] == 'a' || s[j] == 'e' || s[j] == 'i' || s[j] == 'o' || s[j] == 'u')
+#define check2 if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
+
 class Solution {
 public:
     int maxVowels(string s, int k) {
@@ -5,7 +8,7 @@ public:
         int m = 0;
         while(j<k)
         {
-            if (s[j] == 'a' || s[j] == 'e' || s[j] == 'i' || s[j] == 'o' || s[j] == 'u')
+            check1
             {
                 m++;
             }
@@ -14,11 +17,11 @@ public:
         int count = m;
         while(j<s.length())
         {
-            if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
+            check2
             {
                 count--;
             }
-            if (s[j] == 'a' || s[j] == 'e' || s[j] == 'i' || s[j] == 'o' || s[j] == 'u')
+            check1
             {
                 count++;
             }
