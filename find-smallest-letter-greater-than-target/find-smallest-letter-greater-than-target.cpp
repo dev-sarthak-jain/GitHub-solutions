@@ -2,8 +2,6 @@ class Solution {
 public:
     char binary(vector<char>& letters, char target,int s, int e)
     {
-        if (s>e){return letters[0];}
-
         int mid = (s+e)/2;
         if (letters[mid] > target && letters[mid-1]<=target){return letters[mid];}
         else if (letters[mid] > target){return binary(letters,target,s,mid-1);}
