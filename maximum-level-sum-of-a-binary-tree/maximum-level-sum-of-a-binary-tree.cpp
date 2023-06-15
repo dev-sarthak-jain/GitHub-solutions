@@ -1,19 +1,20 @@
+#include <queue>
+
 class Solution {
 public:
     int maxLevelSum(TreeNode* root) {
         int m = root->val;
         int x = 1;
         int y = 1;
-        int n;
 
         queue<TreeNode*> que;
         que.push(root);
 
         while (!que.empty()) {
-            n = que.size();
+            int levelSize = que.size();
             int temp = 0;
 
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < levelSize; i++) {
                 TreeNode* current = que.front();
                 que.pop();
 
@@ -39,4 +40,3 @@ public:
         return x;
     }
 };
-
