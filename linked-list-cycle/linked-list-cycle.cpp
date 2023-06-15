@@ -8,18 +8,20 @@
  */
 class Solution {
 public:
-    unordered_set<ListNode*> s;
     bool hasCycle(ListNode *head) {
         if (head == NULL){return 0;}
+        ListNode* fast = head;
+        ListNode* slow = head;
+        while(1)
+        {
+            if (fast->next != NULL && fast->next->next!=NULL)
+            {
+                fast = fast->next->next;
+                slow = slow->next;
+            }
+            else{return 0;}
 
-        if (s.find(head) == s.end())
-        {
-            s.insert(head);
-            return hasCycle(head->next);
-        }
-        else
-        {
-            return 1;
+            if (fast == slow){return 1;}
         }
     }
 };
