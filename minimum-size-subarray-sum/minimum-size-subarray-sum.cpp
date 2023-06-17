@@ -18,7 +18,6 @@ public:
                 i++;
             }
         }
-        if (m == INT_MAX){m = 0;}
-        return m;
+        return (m == INT_MAX) ? 0:m;
     }
 };
