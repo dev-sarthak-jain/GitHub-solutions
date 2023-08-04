@@ -1,24 +1,22 @@
 class Solution {
 public:
-    double recur(double x, int n)
-    {
-        if (n==0){return 1;}
-
-        double temp = recur(x,n/2);
-        temp = temp*temp;
-        if (n%2!=0)
-        {
-            temp *= x;
-        }
-        return temp;
-    }
-
     double myPow(double x, int n) {
-        double ans = recur(x,n);
         if (n<0)
         {
-            return (1/ans);
+            x = 1/x;
+            n = abs(n);
         }
-        else return ans;
+        double s = 1;
+        while(n>0)
+        {
+            if (n&1)
+            {
+                s*=x;
+            }
+            n >>= 1;
+            x = x*x;
+        }
+        return s;
+
     }
 };
