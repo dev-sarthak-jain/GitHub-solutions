@@ -4,6 +4,8 @@ public:
         if (n==0){return 0;}
         vector<vector<int>> ans = {{1,1},{1,0}};
         ans = matExpo(ans,n-1);
+        cout << ans[0][0] << " " << ans[0][1] << endl;
+        cout << ans[1][0] << " " << ans[1][1] << endl;
         return ans[0][0];
     }
 
