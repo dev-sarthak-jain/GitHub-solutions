@@ -1,34 +1,30 @@
-#define rf return recur(nums,mid+1,y)
-#define lf return recur(nums,x,mid-1)
 class Solution {
 public:
-    int target;
-    int recur(vector<int>& nums, int x, int y)
-    {
-        if (x>y){return -1;}
-
-        int mid = x + (y-x)/2;
-        if (nums[mid] == target){return mid;}
-        else if (nums[mid]>=nums[x])
+    int search(vector<int>& nums, int target) {
+        int x = 0, y = nums.size()-1;
+        while(x<=y)
         {
-            if (nums[mid]<target){rf;}
-            else{
-                if (target<nums[x]){rf;}
-                else{lf;}
+            int mid = x + (y-x)/2;
+            if (target == nums[mid]){return mid;}
+            else if (nums[mid]>=nums[x])
+            {
+                if (nums[mid]<target){x = mid+1;}
+                else
+                {
+                    if (target<nums[x]){x = mid+1;}
+                    else{y = mid-1;}
+                }
+            }
+            else
+            {
+                if (nums[mid]>target){y = mid-1;}
+                else
+                {
+                    if (target<=nums[y]){x = mid+1;}
+                    else{y = mid-1;}
+                }
             }
         }
-        else
-        {
-            if (target<nums[mid]){lf;}
-            else{
-                if (target<=nums[y]){rf;}
-                else{lf;}
-            }
-        }
-    }
-
-    int search(vector<int>& nums, int t) {
-        target = t;
-        return recur(nums,0,nums.size()-1);
+        return -1;
     }
 };
