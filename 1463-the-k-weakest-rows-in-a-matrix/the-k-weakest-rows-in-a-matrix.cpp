@@ -1,26 +1,26 @@
 class Solution {
 public:
     vector<int> kWeakestRows(vector<vector<int>>& nums, int k) {
-        int n = nums.size();
-        int m = nums[0].size();
-        vector<pair<int, int>> rows;
-        for (int i = 0; i < n; i++) {
-            int count = 0;
-            for (int j = 0; j < m; j++) {
-                if (nums[i][j] == 1) {
-                    count++;
-                } else {
+        vector<pair<int,int>> vec;
+        vector<int> ans;
+        int n = nums.size(), m = nums[0].size();
+        for(int i=0; i<n; i++)
+        {
+            vec.push_back({m,i});
+            for(int j=0; j<m; j++)
+            {
+                if (nums[i][j] == 0)
+                {
+                    vec[i] = {j,i};
                     break;
                 }
             }
-            rows.push_back({count, i});
         }
-        sort(rows.begin(), rows.end());
-        vector<int> ans;
-        for (int i = 0; i < k; i++) {
-            ans.push_back(rows[i].second);
+        sort(vec.begin(),vec.end());
+        for(int i=0;i<k;i++)
+        {
+            ans.push_back(vec[i].second);
         }
-        
         return ans;
     }
 };
