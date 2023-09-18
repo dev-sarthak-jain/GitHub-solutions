@@ -1,29 +1,28 @@
 class Solution {
 public:
-    int n;
     vector<vector<int>> ans;
     vector<int> temp;
-
-    void recur(vector<int>& nums, bool check[], int  x)
+    int n;
+    void recur(vector<int>& nums,vector<bool>& check, int x)
     {
-        if (x==n){ans.push_back(temp);return;}
+        if (x==n){ans.push_back(temp);}
 
         for(int i=0;i<n;i++)
         {
-            if (check[i]!=1)
+            if (check[i] != 1)
             {
-                temp.push_back(nums[i]);
                 check[i] = 1;
+                temp.push_back(nums[i]);
                 recur(nums,check,x+1);
-                check[i] = 0;
                 temp.pop_back();
+                check[i] = 0;
             }
         }
     }
 
     vector<vector<int>> permute(vector<int>& nums) {
         n = nums.size();
-        bool check[n];
+        vector<bool> check(n,0);
         recur(nums,check,0);
         return ans;
     }
