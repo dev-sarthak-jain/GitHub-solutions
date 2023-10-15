@@ -1,23 +1,28 @@
 class Solution {
 public:
-    int longestCommonSubsequence(string s1, string s2) {
-        int n = s1.length(),m = s2.length();
-        vector<vector<int>> dp(n+1,vector<int>(m+1,0));
-        for(int i=1;i<=n;i++)
-        {
-            for(int j=1;j<=m;j++)
-            {
-                if (s1[i-1] == s2[j-1])
-                {
-                    dp[i][j] = dp[i-1][j-1]+1;
-                }
-                else
-                {
-                    dp[i][j] = max(dp[i][j-1],dp[i-1][j]);
-                }
-            }
+    string s1,s2;
+    int n,m;
+    int recur(vector<vector<int>>& vec, int x,int y)
+    {
+        if (x==n || y==m){return 0;}
+        if (vec[x][y]!=-1){return vec[x][y];}
+        if (s1[x] == s2[y]){
+            vec[x][y] = recur(vec,x+1,y+1) + 1;
+            return vec[x][y];
         }
+        else
+        {
+            vec[x][y] = max(recur(vec,x+1,y),recur(vec,x,y+1));
+            return vec[x][y];
+        }
+    }
 
-        return dp[n][m];
+    int longestCommonSubsequence(string t1, string t2) {
+        s1 = t1;
+        s2 = t2;
+        n = s1.length();
+        m = s2.length();
+        vector<vector<int>> vec(n,vector<int>(m,-1));
+        return recur(vec,0,0);
     }
 };
