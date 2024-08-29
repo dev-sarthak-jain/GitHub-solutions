@@ -7,7 +7,7 @@ public:
         else{return false;}
     }
 
-    bool func(vector<vector<char>>& board,vector<vector<bool>>& check, string word, int x, int y, int c)
+    bool func(vector<vector<char>>& board,vector<vector<bool>>& check, string& word, int x, int y, int c)
     {
         if (c==wsize){return true;}
         if (valid(x,y,n,m) && !check[x][y] && word[c] == board[x][y])
