@@ -4,11 +4,9 @@ public:
     {
         if (curr==target){ans.push_back(arr);}
         if (curr>target){return;}
-        vector<bool> check (51,0);
         for(int i=x;i<n;i++)
         {
-            if (check[candidates[i]] == 1){continue;}
-            check[candidates[i]] = 1;
+            if (i!=x && candidates[i]==candidates[i-1]){continue;}
             arr.push_back(candidates[i]);
             curr += candidates[i]; 
             func(ans,candidates,arr,target,n,i+1,curr);
