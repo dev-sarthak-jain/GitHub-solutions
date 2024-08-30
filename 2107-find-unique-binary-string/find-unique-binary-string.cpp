@@ -1,27 +1,40 @@
 class Solution {
 public:
-    string findDifferentBinaryString(vector<string>& nums) {
-        int n = nums.size();
-        int m = nums[0].length();
-        int maxi = pow(2,m) - 1;
-        vector<bool> arr (maxi,0);
-        for (const string& s : nums) {
-            int val = 0;
-            for (int i = 0; i < m; ++i) {
-                val = (val << 1) + (s[i] - '0');
-            }
-            arr[val] = 1;
-        }
-        for(int i=0;i<maxi+1;i++)
+    unordered_set<string> set;
+    
+    string func(string& arr, int n, int x)
+    {
+        if (n==x)
         {
-            if (arr[i] == 0)
+            if (set.find(arr)==set.end())
             {
-            
-                string s = std::bitset< 22 >( i ).to_string();
-                s = s.substr(22-m);
-                return s;
+                return arr;
+            }
+            else
+            {
+                return "";
             }
         }
+        arr += "0";
+        string ans = func(arr, n,x+1);
+        if (ans != ""){return ans;}
+        arr.erase(x);
+        arr += "1";
+        ans = func(arr, n,x+1);
+        if (ans != ""){return ans;}
+        arr.erase(x);
         return "";
+    }
+
+    string findDifferentBinaryString(vector<string>& nums) {
+        int n  = nums.size();
+        int m = nums[0].size();
+        string arr;
+        for(int i=0;i<n;i++)
+        {
+            set.insert(nums[i]);
+        }
+        return func(arr,m,0);
+        
     }
 };
