@@ -1,15 +1,27 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
     int m = 0;
-    int recur(TreeNode* root){
+
+    int func(TreeNode * root)
+    {
         if (root == NULL){return 0;}
-        int a=-1,b=-1;
-        if (root->left){a = recur(root->left);}
-        if (root->right){b = recur(root->right);}
-        m = max(m,a+b+2);
-        return 1 + max(a,b);
+        int a = func(root->left), b = func(root->right);
+        m = max(m,a+b);
+        return max(a,b)+1;
     }
+
     int diameterOfBinaryTree(TreeNode* root) {
-        return max(recur(root),m);
+        return max(func(root)-1,m);
     }
 };
