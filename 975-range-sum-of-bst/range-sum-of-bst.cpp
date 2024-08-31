@@ -18,8 +18,8 @@ public:
     {
         if (root == NULL){return;}
         if (root->val>=l && root->val <= h){ans+=root->val;}
-        func(root->left);
-        func(root->right);
+        if (root->val>=l){func(root->left);}
+        if (root->val<=h){func(root->right);}
     }
 
     int rangeSumBST(TreeNode* root, int low, int high) {
