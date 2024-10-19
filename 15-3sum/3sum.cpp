@@ -6,14 +6,13 @@ public:
         int n = nums.size();
 
         for (int i = 0; i<n-2 && nums[i] <= 0; i++) {
-            // Skip duplicates for the first element
             if (i > 0 && nums[i] == nums[i - 1]) continue;
 
             int j = i + 1;
             int k = n - 1;
 
             while (j < k) {
-                int sum = nums[i] + nums[j] + nums[k]; // Calculate sum
+                int sum = nums[i] + nums[j] + nums[k];
 
                 if (sum == 0) {
                     ans.push_back({nums[i], nums[j], nums[k]});
