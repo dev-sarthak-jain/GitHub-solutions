@@ -15,10 +15,10 @@ public:
         else if (s[0]=='1'){b=2;}
         else if (s[0]=='2' && s[1]<'7'){b=2;}
         else {b=1;}
-        cout << a << " " << b << endl;
+
         int temp;
         for(int i=2;i<n;i++)
-        {cout << "i is " << i << endl;
+        {
             temp = 0;
             if (s[i] == '0')
             {
@@ -47,7 +47,6 @@ public:
             }
             a = b;
             b = temp;
-            cout << b << endl;
         }
         return b;
 
