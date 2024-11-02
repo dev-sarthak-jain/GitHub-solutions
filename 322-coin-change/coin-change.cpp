@@ -22,7 +22,6 @@ public:
                 }
             }
         }
-        cout << endl;
         return vec[amount];
     }
 };
