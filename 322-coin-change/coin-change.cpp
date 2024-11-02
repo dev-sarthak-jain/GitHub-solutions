@@ -22,10 +22,6 @@ public:
                 }
             }
         }
-        for(int i=0;i<=amount;i++)
-        {
-            cout << vec[i] << " ";
-        }
         cout << endl;
         return vec[amount];
     }
