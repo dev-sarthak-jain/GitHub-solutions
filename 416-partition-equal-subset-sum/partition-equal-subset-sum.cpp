@@ -14,11 +14,6 @@ public:
                 vec[j] = vec[j] || vec[j - nums[i]];
             }
         }
-        for(int i=0;i<total_sum+1;i++)
-        {
-            cout << vec[i] << " ";
-        }
-        cout << endl;
         return vec[total_sum];
     }
 };
