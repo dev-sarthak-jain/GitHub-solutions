@@ -13,6 +13,7 @@ public:
             {
                 vec[j] = vec[j] || vec[j - nums[i]];
             }
+            if (vec[total_sum]){return true;}
         }
         return vec[total_sum];
     }
