@@ -6,7 +6,7 @@ public:
     {
         if (x==n){return true;}
         if (check[x]==0){return check[x];}
-        for(int i=x;i<x+maxLen;i++)
+        for(int i=x;i<n;i++)
         {
             if (i-x+1>maxLen){check[x]=0;return 0;}
             if (set.find(s.substr(x,i-x+1))!=set.end())
