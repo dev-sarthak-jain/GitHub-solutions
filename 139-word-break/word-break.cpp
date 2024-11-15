@@ -1,36 +1,31 @@
 class Solution {
 public:
-    unordered_set<string> sett;
+    int maxLen = 0;
     int n;
-
-    bool recur(string s, int x, vector<int>& check) {
-        if (n == x) {
-            return true;
-        }
-        cout << x << endl;
-        for (int i = x; i < n; i++) {
-            if (sett.find(s.substr(x, i - x + 1)) != sett.end()) {
-                if (check[i + 1] == 1) {
-                    check[x] = true;
-                    return true;
-                }
-                else if (check[i+1] == -1 && recur(s, i + 1, check))
-                {
-                    check[x] = true;
-                    return true;
-                }
+    bool func(string& s, unordered_set<string>& set,vector<bool>& check, int x)
+    {
+        if (x==n){return true;}
+        if (check[x]==0){return check[x];}
+        for(int i=x;i<x+maxLen;i++)
+        {
+            if (set.find(s.substr(x,i-x+1))!=set.end())
+            {
+                if (func(s,set,check,i+1) == true){return 1;}
             }
         }
-        check[x] = false;
-        return false;
+        check[x]=0;
+        return 0;
     }
 
-    bool wordBreak(string s, vector<string>& word) {
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string> set;
         n = s.length();
-        for (int i = 0; i < word.size(); i++) {
-            sett.insert(word[i]);
+        vector<bool> check(n,1);
+        for(int i=0;i<wordDict.size();i++)
+        {
+            maxLen = max(maxLen, (int)wordDict[i].length());
+            set.insert(wordDict[i]);
         }
-        vector<int> check(n + 1, -1);
-        return recur(s, 0, check);
+        return func(s,set,check,0);
     }
 };
