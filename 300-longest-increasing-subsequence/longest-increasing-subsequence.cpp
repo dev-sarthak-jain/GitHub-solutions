@@ -6,16 +6,18 @@ public:
         int max_ans = 1;
         for(int i=1;i<n;i++)
         {
+            int ans = 1;
             for(int j=i-1;j>=0;j--)
             {
                 if (nums[j]<nums[i])
                 {
-                    vec[i] = max(vec[j]+1,vec[i]);
-                    if (vec[i] > max_ans){
+                    ans = max(vec[j]+1,ans);
+                    if (ans > max_ans){
                         break;
                     }
                 }
             }
+            vec[i] = ans;
             max_ans = max(max_ans,vec[i]);
         }
         return max_ans;
