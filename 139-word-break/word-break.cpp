@@ -8,6 +8,7 @@ public:
         if (check[x]==0){return check[x];}
         for(int i=x;i<x+maxLen;i++)
         {
+            if (i-x+1>maxLen){check[x]=0;return 0;}
             if (set.find(s.substr(x,i-x+1))!=set.end())
             {
                 if (func(s,set,check,i+1) == true){return 1;}
