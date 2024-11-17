@@ -1,19 +1,43 @@
 class Solution {
 public:
-    int n,m;
-    int func(vector<vector<int>>& vec, string& text1, string& text2, int x,int y)
-    {
-        if (x>=n || y>=m){return 0;}
-        else if (vec[x][y]!=-1){return vec[x][y];}
-        else if (text1[x] == text2[y]){vec[x][y] = 1 + func(vec,text1,text2,x+1,y+1);}
-        else {vec[x][y] = max(func(vec,text1,text2,x+1,y),func(vec,text1,text2,x,y+1));}
-        return vec[x][y];
-    }
-
-    int longestCommonSubsequence(string text1, string text2) {
-        n = text1.length();
-        m = text2.length();
-        vector<vector<int>> vec(n,vector<int>(m,-1));
-        return func(vec,text1,text2,0,0);
+    int longestCommonSubsequence(string t1, string t2) {
+        int n = t1.length(), m = t2.length();
+        vector<vector<int>> vec(n,vector<int>(m));
+        if (t1[0] == t2[0]){vec[0][0] = 1;}
+        for(int i=1;i<n;i++)
+        {
+            if (t1[i] == t2[0]){vec[i][0] = 1;}
+            else{vec[i][0] = vec[i-1][0];}
+        }
+        for(int i=1;i<m;i++)
+        {
+            if (t1[0] == t2[i]){vec[0][i] = 1;}
+            else{vec[0][i] = vec[0][i-1];}
+        }
+        for(int i=1;i<n;i++)
+        {
+            for(int j=1;j<m;j++)
+            {
+                if (t1[i] == t2[j])
+                {
+                    vec[i][j] = vec[i-1][j-1] + 1;
+                }
+                else
+                {
+                    vec[i][j] = max(vec[i-1][j],vec[i][j-1]);
+                }
+            }
+        }
+        /*
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                cout << vec[i][j] << " ";
+            }
+            cout << endl;
+        }
+        */
+        return vec[n-1][m-1];
     }
 };
