@@ -12,7 +12,6 @@ public:
                 if (grid[i][j]-'0' && !check[i][j])
                 {
                     island++;
-                    cout << island << endl;
                     stack<vector<int>> s;
                     s.push({i,j});
                     while(!s.empty())
@@ -20,7 +19,6 @@ public:
                         vector<int> tuple = s.top();
                         s.pop();
                         int x = tuple[0], y = tuple[1];
-                        cout << x << " " << y << endl;
                         check[x][y] = 1;
                         if (x-1>=0 && grid[x-1][y]-'0' &&!check[x-1][y]){s.push({x-1,y});}
                         if (y-1>=0 && grid[x][y-1]-'0' && !check[x][y-1]){s.push({x,y-1});}
