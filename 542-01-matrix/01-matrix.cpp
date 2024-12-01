@@ -1,42 +1,38 @@
 class Solution {
 public:
-
-    vector<vector<int>> list = {{1,0},{0,1},{-1,0},{0,-1}};
     vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+        queue<pair<pair<int,int>,int>> que;
+        int zero = 0;
         int n = mat.size();
         int m = mat[0].size();
-
-        vector<vector<int>> vec(n,vector<int>(m,INT_MAX));
-        queue<pair<int,int>> q;
-        for(int i=0; i<n; i++)
+        vector<vector<bool>> check(n,vector<bool>(m,0));
+        for(int i=0;i<n;i++)
         {
-            for(int j=0; j<m; j++)
+            for(int j = 0;j<m;j++)
             {
-                if (mat[i][j] == 0)
+                if (!mat[i][j])
                 {
-                    q.push(make_pair(i,j));
-                    vec[i][j] = 0;
+                    que.push({{i,j},0});
+                    check[i][j] = 1;
+                }
+                else
+                {
+                    zero++;
                 }
             }
         }
 
-        while(q.size()!=0)
+        while(zero && !que.empty())
         {
-            pair<int,int> current = q.front();
-            q.pop();
-            int x = current.first, y = current.second;
-            for(int i=0;i<4;i++)
-            {
-                int a = x + list[i][0];
-                int b = y + list[i][1];
-                if (a >= 0 && a < n && b >= 0 && b < m && vec[a][b]==INT_MAX)
-                {
-                    q.push(make_pair(a,b));
-                    vec[a][b] = vec[x][y] + 1;
-                }
-            }
+            auto node = que.front();
+            que.pop();
+            int x = node.first.first, y = node.first.second, level = node.second;
+            if (x+1<n && !check[x+1][y]){zero--;check[x+1][y] = 1; mat[x+1][y] = level+1; que.push({{x+1,y},level+1});}
+            if (x-1>=0 && !check[x-1][y]){zero--;check[x-1][y] = 1; mat[x-1][y] = level+1; que.push({{x-1,y},level+1});}
+            if (y+1<m && !check[x][y+1]){zero--;check[x][y+1] = 1; mat[x][y+1] = level+1; que.push({{x,y+1},level+1});}
+            if (y-1>=0 && !check[x][y-1]){zero--;check[x][y-1] = 1; mat[x][y-1] = level+1; que.push({{x,y-1},level+1});}
         }
-
-        return vec;
+        
+        return mat;
     }
 };
