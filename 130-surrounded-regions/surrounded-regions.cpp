@@ -10,13 +10,13 @@ public:
             {
                 if (!check[i][j] && board[i][j] == 'O')
                 {
-                    stack<pair<int,int>> s;
+                    queue<pair<int,int>> s;
                     s.push({i,j});
                     vector<pair<int,int>> rec;
                     bool edge = false;
                     while(!s.empty())
                     {
-                        pair<int,int> p = s.top();
+                        pair<int,int> p = s.front();
                         s.pop();
                         int x = p.first, y = p.second;
                         if (x<0 || x>=n || y<0 || y>=m){edge = 1;continue;}
