@@ -1,36 +1,27 @@
 class Solution {
 public:
     int countPalindromicSubsequence(string s) {
-        int ans = 0;
         int n = s.length();
-        vector<vector<bool>> vec(26,vector<bool>(26,0));
-        vector<int> rec(26,-1);
-        vector<int> temp (26,0);
+        vector<pair<int,int>> vec(26,{-1,-1});
         for(int i=0;i<n;i++)
         {
-            if (rec[s[i]-'a'] == -1){rec[s[i]-'a'] = i;}
-            else
+            if (vec[s[i] - 'a'].first==-1){vec[s[i] - 'a'].first = i;}
+        }
+        for(int i=n-1;i>=0;i--)
+        {
+            if (vec[s[i] - 'a'].second==-1){vec[s[i] - 'a'].second = i;}
+        }
+        int ans = 0;
+        for(int i=0;i<26;i++)
+        {
+            vector<bool> rec(26,0);
+            int x = vec[i].first, y = vec[i].second;
+            for(int j=x+1;j<y;j++)
             {
-                if (temp[s[i]-'a']==0)
+                if (!rec[s[j]-'a'])
                 {
-                    temp[s[i] - 'a'] = 1;
-                }
-                else if (temp[s[i] - 'a']==1)
-                {
+                    rec[s[j]-'a'] = 1;
                     ans++;
-                    temp[s[i] - 'a'] = 2;
-                }
-                int x = rec[s[i]-'a'];
-                rec[s[i]-'a'] = i;
-                int k = x+1;
-                while(k<i)
-                {
-                    if (!vec[s[i]-'a'][s[k]-'a'])
-                    {
-                        vec[s[i]-'a'][s[k]-'a'] = 1;
-                        ans++;
-                    }
-                    k++;
                 }
             }
         }
