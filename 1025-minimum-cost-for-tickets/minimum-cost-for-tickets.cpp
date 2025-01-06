@@ -18,11 +18,6 @@ public:
                 vec[k] = min(vec[k],cost);
                 k++;
             }
-            for(int i=1;i<n+1;i++)
-            {
-                cout << vec[i] << " ";
-            }
-            cout << endl;
             temp = days[i-1] + 30;
             cost = vec[i-1] + costs[2];
             k = i;
@@ -31,11 +26,6 @@ public:
                 vec[k] = min(vec[k],cost);
                 k++;
             }
-            for(int i=1;i<n+1;i++)
-            {
-                cout << vec[i] << " ";
-            }
-            cout << endl;
         }
         return vec[n];
     }
