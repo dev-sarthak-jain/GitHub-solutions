@@ -18,7 +18,6 @@ public:
         int total = 0;
         for(int i=1;i<n;i++)
         {
-            //cout << vec[i] << " ";
             if (vec[i]>=0)
             {
                 total++;
