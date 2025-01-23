@@ -1,35 +1,43 @@
 class Solution {
 public:
-    int n,m;
-    vector<vector<vector<int>>> dp;
-
-    int func(vector<vector<int>>& coins, int x, int y, int k)
-    {
-        if (x>=n || y>=m){return INT_MIN;}
-        if (x==n-1 && y == m-1){
-            if (k>0 && coins[x][y]<0){return 0;}
-            return coins[x][y];
-        }
-        if (dp[x][y][k]!=INT_MIN){return dp[x][y][k];}
-
-        int pathMax = INT_MIN;
-
-        if (x+1<n) pathMax = max(pathMax, coins[x][y] + func(coins,x+1,y,k));
-        if (y+1<m) pathMax = max(pathMax, coins[x][y] + func(coins,x,y+1,k));
-        if (coins[x][y]<0 && k >0)
-        {
-            if (x+1<n) pathMax = max(pathMax, func(coins,x+1,y,k-1));
-            if (y+1<m) pathMax = max(pathMax, func(coins,x,y+1,k-1));
-        }
-        return dp[x][y][k] = pathMax;
-
-    }
-
-
     int maximumAmount(vector<vector<int>>& coins) {
-        n = coins.size();
-        m = coins[0].size();
-        dp = vector<vector<vector<int>>>(n, vector<vector<int>>(m, vector<int>(3, INT_MIN)));
-        return func(coins,0,0,2);
+        int n = coins.size();
+        int m = coins[0].size();
+        vector<vector<vector<int>>> dp = vector<vector<vector<int>>>(n, vector<vector<int>>(m, vector<int>(3, INT_MIN)));
+        dp[0][0][0] = coins[0][0];
+        if (coins[0][0]<0)
+        {
+            dp[0][0][1] = 0;
+        }
+        for(int k=0;k<3;k++)
+        {
+            for(int i=0;i<n;i++)
+            {
+                for(int j = 0;j<m;j++)
+                {
+                    if (dp[i][j][k]==INT_MIN){continue;}
+                    if (i+1<n){dp[i+1][j][k] = max(dp[i][j][k] + coins[i+1][j], dp[i+1][j][k]);}
+                    if (j+1<m){dp[i][j+1][k] = max(dp[i][j][k] + coins[i][j+1], dp[i][j+1][k]);}
+                    if (i+1<n && coins[i+1][j]<0 && k<2){dp[i+1][j][k+1] = max(dp[i][j][k],dp[i+1][j][k+1]);}
+                    if (j+1<m && coins[i][j+1]<0 && k<2){dp[i][j+1][k+1] = max(dp[i][j][k],dp[i][j+1][k+1]);}
+                }
+            }
+        }
+        /*
+        for(int k=0;k<3;k++)
+        {
+            for(int i=0;i<n;i++)
+            {
+                for(int j = 0;j<m;j++)
+                {
+                    cout << dp[i][j][k] << " ";
+                }
+                cout << endl;
+            }
+            cout << endl << endl;
+        }
+        */
+        return max(dp[n-1][m-1][0], max(dp[n-1][m-1][1],dp[n-1][m-1][2]));
+
     }
 };
