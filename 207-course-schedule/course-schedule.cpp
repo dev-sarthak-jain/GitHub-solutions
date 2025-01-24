@@ -16,12 +16,10 @@ public:
             {
                 if (vec[i] == 0){vec[i]--;total--;break;}
             }
-            cout << i << " ";
             if (i==n){return false;}
             for(int j=0;j<graph[i].size();j++)
             {
                 vec[graph[i][j]]--;
-                cout << "F " << graph[i][j];
             }
         }
         return true;;
