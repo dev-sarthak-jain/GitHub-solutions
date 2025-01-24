@@ -8,21 +8,25 @@ public:
             graph[pre[i][0]].push_back(pre[i][1]);
             vec[pre[i][1]]++;
         }
-        int total = n;
-        while(total)
+        queue<int> que;
+        for(int i=0;i<n;i++)
         {
-            int i=0;
-            for(;i<n;i++)
-            {
-                if (vec[i] == 0){vec[i]--;total--;break;}
-            }
-            if (i==n){return false;}
+            if (vec[i] == 0){que.push(i);}
+        }
+        int total = n;
+        while(total && que.size())
+        {
+            int i = que.front();
+            que.pop();
+            total--;
             for(int j=0;j<graph[i].size();j++)
             {
-                vec[graph[i][j]]--;
+                if (!--vec[graph[i][j]])
+                {
+                    que.push(graph[i][j]);
+                }
             }
         }
-        return true;;
-
+        return total==0;
     }
 };
