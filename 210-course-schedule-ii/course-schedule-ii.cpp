@@ -16,7 +16,6 @@ public:
         vector<int> ans;
         while(!s.empty())
         {
-            cout << s.size() << " ";
             int x = s.top();
             s.pop();
             ans.push_back(x);
