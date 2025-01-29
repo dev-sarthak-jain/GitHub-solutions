@@ -18,7 +18,7 @@ public:
             if (vis[i]==1){s.push(i);}
         }
         int total = n;
-        while(total != 1 && total !=2 )
+        while(total > 2 )
         {
             int m = s.size();
             total = total-s.size();
