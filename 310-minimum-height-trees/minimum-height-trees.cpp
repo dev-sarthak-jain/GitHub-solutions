@@ -12,7 +12,7 @@ public:
             graph[pre[i][0]].push_back(pre[i][1]);
             graph[pre[i][1]].push_back(pre[i][0]);
         }
-        stack<int> s;
+        queue<int> s;
         for(int i=0;i<n;i++)
         {
             if (vis[i]==1){s.push(i);}
@@ -20,28 +20,26 @@ public:
         int total = n;
         while(total != 1 && total !=2 )
         {
-            vector<int> temp;
-            while(!s.empty())
+            int m = s.size();
+            total = total-s.size();
+            while(m)
             {
-                temp.push_back(s.top());
+                int x = s.front();
                 s.pop();
-            }
-            for(int i=0;i<temp.size();i++)
-            {
-                total--;
-                for(int j=0;j<graph[temp[i]].size();j++)
+                for(int j=0;j<graph[x].size();j++)
                 {
-                    if (--vis[graph[temp[i]][j]] == 1)
+                    if (--vis[graph[x][j]] == 1)
                     {
-                        s.push(graph[temp[i]][j]);
+                        s.push(graph[x][j]);
                     }
                 }
+                m--;
             }
         }
         vector<int> ans;
         while(!s.empty())
         {
-            ans.push_back(s.top());
+            ans.push_back(s.front());
             s.pop();
         }
         return ans;
