@@ -12,25 +12,25 @@
 class Solution {
 public:
 
-    TreeNode* func(vector<int>& pre, vector<int>& in, int a, int b, int x, int y)
+    unordered_map<int,int> in;
+
+    TreeNode* func(vector<int>& pre, int a, int b, int x, int y)
     {
         if (x>y){return NULL;}
         TreeNode* temp = new TreeNode(pre[a]);
-        int mid;
-        for(int i=x;i<=y;i++)
-        {
-            if (in[i]==pre[a]){mid = i; break;}
-        }
-
+        int mid = in[pre[a]];
         int to = a+(mid-x);
-
-        temp->left = func(pre,in,a+1,to,x,mid-1);
-        temp->right = func(pre,in,to+1,b,mid+1,y);
+        temp->left = func(pre,a+1,to,x,mid-1);
+        temp->right = func(pre,to+1,b,mid+1,y);
         return temp;
     }
 
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         int n = preorder.size();
-        return func(preorder,inorder,0,n-1,0,n-1);
+        for(int i=0;i<n;i++)
+        {
+            in[inorder[i]] = i; 
+        }
+        return func(preorder,0,n-1,0,n-1);
     }
 };
