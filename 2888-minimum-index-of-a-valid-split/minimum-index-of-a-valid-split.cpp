@@ -17,7 +17,6 @@ public:
         count = 0;
         for(float i=0;i<n-1;i++)
         {
-            cout << count << endl;
             if (nums[i] == majority){count++;}
             if ((i+1)/2<count && (n-i-1)/2<(total-count)){return i;}
         }
