@@ -6,12 +6,10 @@ public:
         sort(nums.begin(),nums.end());
         int last = nums[0] - k;
         int count = 1;
-        int i=1;
-        while(i<n)
+        for(int i=1;i<n;i++)
         {
             int val = max(last+1,nums[i]-k);
             if (val<nums[i]+k+1){count++;last = val;}
-            i++;
         }
         return count;
     }
