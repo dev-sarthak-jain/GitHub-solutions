@@ -12,7 +12,6 @@ public:
             {
                 if (bank[i][j] == '1'){num++;}
             }
-            //cout << num << " " << last << " " << count << endl;
             count += (last*num);
             if (num!=0){last = num;}
         }
