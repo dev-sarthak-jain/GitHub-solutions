@@ -3,8 +3,8 @@
 class Solution {
 public:
     int concatenatedBinary(int n) {
-        long long int ans = 1;
-        long long int res = 2;
+        long int ans = 1;
+        long int res = 2;
         for(int i=2;i<n+1;i++)
         {
             ans = ans << res;
