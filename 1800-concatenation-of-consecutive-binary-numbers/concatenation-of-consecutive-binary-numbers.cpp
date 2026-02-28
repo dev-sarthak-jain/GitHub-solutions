@@ -3,15 +3,12 @@
 class Solution {
 public:
     int concatenatedBinary(int n) {
-        long int ans = 1;
-        long int res = 2;
-        for(int i=2;i<n+1;i++)
+        long int ans = 0;
+        long int res = 0;
+        for(int i=1;i<n+1;i++)
         {
-            ans = ans << res;
-            if (i == pow(2,res)-1){res=res+1;}
-            ans = ans | i;
-            ans = ans%MOD;
-            
+            if ((i&(i-1)) == 0){res++;}
+            ans = ((ans << res)|i)%MOD;
         }
         return ans;
     }
